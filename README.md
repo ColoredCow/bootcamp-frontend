@@ -9,3 +9,7 @@
 ### Read Up
 1. [Bootstrap 4](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
 2. [VueJS](https://vuejs.org/v2/guide/)
+
+
+### Other
+1. Setup your GitHub account.
