@@ -2,11 +2,11 @@
 <html>
 <head>
     <title>Soirée</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="bootstrap-4.0.0-dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="bootstrap-4.0.0-dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <style>
     .carousel-item {
@@ -46,7 +46,7 @@
         </div>
     </nav>
     <br>
-    <div class="contrainer-fluid">
+    <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-10">
                 <div class="jumbotron">
@@ -65,45 +65,17 @@
             </div>
         </div>
     </div>
-    <div class="contrainer-fluid">
+    <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-10">
                 <hr>
                 <h1 class="display-4">Past Events</h1>
-                <div class="row justify-content-md-center">
-                    <div class="col-4">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="https://scontent.fdel1-4.fna.fbcdn.net/v/t31.0-8/17212267_1801527916731127_3340760783375836061_o.jpg?_nc_cat=0&oh=6af21c849b4011a1e3a836b5442a7c61&oe=5BAC5EEF" alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-title"><i class="fas fa-calendar-alt"></i> 22nd March, 2018</p>
-                                <p class="card-text"><i class="fas fa-map-marker-alt"></i> Gurgaon</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="https://scontent.fdel1-4.fna.fbcdn.net/v/t31.0-8/17191904_1801447853405800_8076038643443945856_o.jpg?_nc_cat=0&oh=421fbbbea3b158dae78dc7954859486c&oe=5BA17FE8" alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-title"><i class="fas fa-calendar-alt"></i> 13th December, 2017</p>
-                                <p class="card-text"><i class="fas fa-map-marker-alt"></i> Tehri</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="https://scontent.fdel1-4.fna.fbcdn.net/v/t31.0-8/17192458_1801477070069545_6640481842488629040_o.jpg?_nc_cat=0&oh=4f4dffa15d21492d147f752bcbbee3cd&oe=5BE73407" alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-title"><i class="fas fa-calendar-alt"></i> 5th September, 2017</p>
-                                <p class="card-text"><i class="fas fa-map-marker-alt"></i> Gurgaon</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="row justify-content-md-center" id="past-events-container"></div>
             </div>
         </div>
     </div>
 
-    <div class="contrainer-fluid">
+    <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-10">
 
@@ -136,7 +108,7 @@
     <br>
     <br>
 
-    <div class="contrainer-fluid bg-light">
+    <div class="container bg-light">
         <div class="row justify-content-md-center">
             <div class="col-10 text-muted text-center p-2">
                 <i class="fas fa-award text-warning"></i> Day 1 at <a href="https://coloredcow.com/codetrek-session/front-end-development/">FrontEnd Bootcamp, CodeTrek</a>    
@@ -191,5 +163,53 @@
 <script>
     $(document).ready(function() {
         $('.carousel').carousel();
+        populatePastEvents ();
     })
+
+
+function populatePastEvents () {
+
+    var container =  document.getElementById('past-events-container');
+    var pastEvents = [
+        {
+            'img' : 'https://scontent.fdel1-4.fna.fbcdn.net/v/t31.0-8/17212267_1801527916731127_3340760783375836061_o.jpg?_nc_cat=0&oh=6af21c849b4011a1e3a836b5442a7c61&oe=5BAC5EEF',
+            'date' : '22nd March, 2018',
+            'location' : 'Tehri'
+        },
+        {
+            'img' : 'https://scontent.fdel1-4.fna.fbcdn.net/v/t31.0-8/17191904_1801447853405800_8076038643443945856_o.jpg?_nc_cat=0&oh=421fbbbea3b158dae78dc7954859486c&oe=5BA17FE8',
+            'date' : '13th December, 2017',
+            'location' : 'Gurgaon'
+        },
+        {
+            'img' : 'https://scontent.fdel1-4.fna.fbcdn.net/v/t31.0-8/17192458_1801477070069545_6640481842488629040_o.jpg?_nc_cat=0&oh=4f4dffa15d21492d147f752bcbbee3cd&oe=5BE73407',
+            'date' : '5th September, 2017',
+            'location' : 'Tehri'
+        }
+    ];
+
+    pastEvents.forEach(function(event){
+        console.log(event);
+        container.innerHTML += getPastEventCard(event['img'], event['date'], event['location']);
+    });
+}
+
+
+function getPastEventCard(img, date, location) {
+
+    var html = '';
+    html += '    <div class="col-4">';
+    html += '    <div class="card">';
+    html += '        <img class="card-img-top" src="' + img + '" alt="Card image cap">';
+    html += '        <div class="card-body">';
+    html += '            <p class="card-title"><i class="fas fa-calendar-alt"></i> ' + date + '</p>';
+    html += '            <p class="card-text"><i class="fas fa-map-marker-alt"></i> ' + location + '</p>';
+    html += '        </div>';
+    html += '    </div>';
+    html += '</div>';
+
+    return html;
+}
+
 </script>
+
