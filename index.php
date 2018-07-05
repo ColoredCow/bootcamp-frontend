@@ -4,9 +4,10 @@
     <title>Soirée</title>
     <link rel="stylesheet" href="bootstrap-4.0.0-dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="bootstrap-4.0.0-dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <style>
     .carousel-item {
@@ -17,6 +18,7 @@
     }
 </style>
 <body>
+    <div id="app">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Soirée</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,8 +71,18 @@
         <div class="row justify-content-md-center">
             <div class="col-10">
                 <hr>
-                <h1 class="display-4">Past Events</h1>
-                <div class="row justify-content-md-center" id="past-events-container"></div>
+                <h1 class="display-4"> {{ title }}</h1>
+                <div class="row justify-content-md-center">
+                    <div class="col-4" v-for="event in pastEvents">
+                        <div class="card">
+                            <img class="card-img-top" :src="event.img" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-title"><i class="fas fa-calendar-alt" ></i> <span v-text="event.date"></span>  </p>
+                                <p class="card-text"><i class="fas fa-map-marker-alt"></i> {{ event.location }} </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -156,11 +168,36 @@
         </div>
     </div>
     </div>
-
+    </div>
 </body>
 
 
 <script>
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            title: 'Past Events',
+            pastEvents: [
+                {
+                    'img' : 'https://scontent.fdel1-4.fna.fbcdn.net/v/t31.0-8/17212267_1801527916731127_3340760783375836061_o.jpg?_nc_cat=0&oh=6af21c849b4011a1e3a836b5442a7c61&oe=5BAC5EEF',
+                    'date' : '22nd March, 2018',
+                    'location' : 'Tehri'
+                },
+                {
+                    'img' : 'https://scontent.fdel1-4.fna.fbcdn.net/v/t31.0-8/17191904_1801447853405800_8076038643443945856_o.jpg?_nc_cat=0&oh=421fbbbea3b158dae78dc7954859486c&oe=5BA17FE8',
+                    'date' : '13th December, 2017',
+                    'location' : 'Gurgaon'
+                },
+                {
+                    'img' : 'https://scontent.fdel1-4.fna.fbcdn.net/v/t31.0-8/17192458_1801477070069545_6640481842488629040_o.jpg?_nc_cat=0&oh=4f4dffa15d21492d147f752bcbbee3cd&oe=5BE73407',
+                    'date' : '5th September, 2017',
+                    'location' : 'Tehri'
+                }
+            ],
+        }
+    });
+
     $(document).ready(function() {
         $('.carousel').carousel();
         populatePastEvents ();
@@ -170,26 +207,8 @@
 function populatePastEvents () {
 
     var container =  document.getElementById('past-events-container');
-    var pastEvents = [
-        {
-            'img' : 'https://scontent.fdel1-4.fna.fbcdn.net/v/t31.0-8/17212267_1801527916731127_3340760783375836061_o.jpg?_nc_cat=0&oh=6af21c849b4011a1e3a836b5442a7c61&oe=5BAC5EEF',
-            'date' : '22nd March, 2018',
-            'location' : 'Tehri'
-        },
-        {
-            'img' : 'https://scontent.fdel1-4.fna.fbcdn.net/v/t31.0-8/17191904_1801447853405800_8076038643443945856_o.jpg?_nc_cat=0&oh=421fbbbea3b158dae78dc7954859486c&oe=5BA17FE8',
-            'date' : '13th December, 2017',
-            'location' : 'Gurgaon'
-        },
-        {
-            'img' : 'https://scontent.fdel1-4.fna.fbcdn.net/v/t31.0-8/17192458_1801477070069545_6640481842488629040_o.jpg?_nc_cat=0&oh=4f4dffa15d21492d147f752bcbbee3cd&oe=5BE73407',
-            'date' : '5th September, 2017',
-            'location' : 'Tehri'
-        }
-    ];
 
     pastEvents.forEach(function(event){
-        console.log(event);
         container.innerHTML += getPastEventCard(event['img'], event['date'], event['location']);
     });
 }
